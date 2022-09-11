@@ -13,7 +13,9 @@ import (
 
 func main() {
 	configs.GetEnv()
-	configs.ConnectDB()
+	if configs.DB == nil {
+		configs.ConnectDB()
+	}
 	router := mux.NewRouter()
 	router.Use(middleware.CommonMiddleware)
 	routes.Routes(router)
